@@ -9,6 +9,8 @@
 	import { fade, slide } from 'svelte/transition';
 	import Tooltip from '$lib/components/common/Tooltip.svelte';
 	import { userSignOut } from '$lib/apis/auths';
+ 	import { user } from '$lib/stores'; // Импортируем хранилище пользователя
+  	import { get } from 'svelte/store'; // Функция для получения значения из хранилища
 
 	const i18n = getContext('i18n');
 
@@ -17,6 +19,12 @@
 	export let className = 'max-w-[240px]';
 
 	const dispatch = createEventDispatcher();
+ 	// Получаем текущего пользователя из хранилища
+  	const currentUser = get(user);
+
+  	// Извлекаем user id
+  	let userId = currentUser?.id; // Используем опциональную цепочку, чтобы избежать ошибок, если пользователь не загружен
+	console.log("userid", userId)
 </script>
 
 <DropdownMenu.Root
